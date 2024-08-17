@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { League } from '@/types/matches';
 
 const fetchMatches = (date: Date): League[] => {
-  // Your logic to fetch matches based on the date
+  // TODO: add actual logic to fetch matches based on the date
   return [
     {
       leagueName: 'England - Premier League',
