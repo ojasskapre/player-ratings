@@ -3,27 +3,28 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+  --foreground: #E4E4E7; /* Light gray for text */
+  --background: #121212; /* Dark background */
+  --primary: #1F1F1F; /* Slightly lighter dark for primary elements */
+  --secondary: #2C2C2C; /* Dark gray for secondary elements */
+  --card: #1F1F1F; /* Same as primary for card backgrounds */
+  --card-foreground: #E4E4E7; /* Light gray for card text */
+  --popover: #2C2C2C; /* Dark gray for popovers */
+  --popover-foreground: #E4E4E7; /* Light gray for popover text */
+  --muted: #3F3F3F; /* Muted dark gray */
+  --muted-foreground: #A1A1AA; /* Muted light gray */
+  --accent: #3B82F6; /* Blue for accents */
+  --accent-foreground: #FFFFFF; /* White for accent text */
+  --destructive: #EF4444; /* Red for destructive actions */
+  --destructive-foreground: #FFFFFF; /* White for destructive text */
+  --border: #3F3F3F; /* Dark gray for borders */
+  --input: #2C2C2C; /* Dark gray for inputs */
+  --ring: #3B82F6; /* Blue for focus rings */
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  color: var(--foreground);
+  background: var(--background);
 }
 
 @layer utilities {
