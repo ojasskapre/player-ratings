@@ -15,6 +15,7 @@ const config: Config = {
         secondary: 'var(--secondary)',
         card: 'var(--card)',
         'card-foreground': 'var(--card-foreground)',
+        'card-hover': 'var(--card-hover)',
         popover: 'var(--popover)',
         'popover-foreground': 'var(--popover-foreground)',
         muted: 'var(--muted)',

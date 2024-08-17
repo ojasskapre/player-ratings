@@ -1,6 +1,7 @@
 import React from 'react';
 import { League } from '@/types/matches';
 import ReactCountryFlag from 'react-country-flag';
+import MatchCard from './MatchCard';
 
 type LeagueMatchCardProps = League;
 
@@ -28,28 +29,7 @@ const LeagueMatchCard: React.FC<LeagueMatchCardProps> = ({
       </div>
       <div className="p-2 space-y-1">
         {matches.map((match) => (
-          <div
-            key={match.id}
-            className="bg-card text-card-foreground p-3 rounded-lg flex justify-between items-center"
-          >
-            <div className="flex-1 text-right">
-              <span className="font-semibold">{match.homeTeam}</span>
-            </div>
-            <div className="flex items-center justify-center w-24 mx-4">
-              {match.status === 'completed' ? (
-                <span className="text-lg font-bold">
-                  {match.homeScore} - {match.awayScore}
-                </span>
-              ) : (
-                <span className="text-lg text-muted-foreground">
-                  {match.time}
-                </span>
-              )}
-            </div>
-            <div className="flex-1 text-left">
-              <span className="font-semibold">{match.awayTeam}</span>
-            </div>
-          </div>
+          <MatchCard key={match.id} match={match} />
         ))}
       </div>
     </div>
