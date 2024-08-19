@@ -1,5 +1,6 @@
 import React from 'react';
 import { MatchDetailsTab } from '@/types/matches';
+import { Button } from '@/components/ui/button'; // Importing the shadcn Button component
 
 type TabSelectorProps = {
   selectedTab: MatchDetailsTab;
@@ -29,19 +30,20 @@ const TabSelector: React.FC<TabSelectorProps> = ({
   ];
 
   return (
-    <div className="flex justify-left p-2 mb-4">
+    <div className="flex justify-start p-2 mb-4">
       {tabs.map((tab) => (
-        <button
+        <Button
           key={tab.id}
+          variant="ghost"
           onClick={() => onSelectTab(tab)}
-          className={`text-md font-semibold px-4 py-2 ${
+          className={`text-md font-semibold px-4 py-2 shadow-none rounded-none  ${
             selectedTab.id === tab.id
-              ? 'bg-primary text-foreground border-b-2 border-b-white'
-              : 'text-muted-foreground hover:bg-card hover:text-foreground'
+              ? 'bg-none border-b-2 border-b-neutral-600'
+              : ''
           }`}
         >
           {tab.displayName}
-        </button>
+        </Button>
       ))}
     </div>
   );

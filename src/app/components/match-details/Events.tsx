@@ -1,15 +1,79 @@
 import React from 'react';
 import { TimelineEvent } from '@/types/matches';
+import { Card, CardContent } from '@/components/ui/card';
+import { Repeat, Icon } from 'lucide-react';
+import { soccerBall } from '@lucide/lab';
 
 type EventsProps = {
   events: TimelineEvent[];
 };
 
 const Events: React.FC<EventsProps> = ({ events }) => {
+  // Helper function to render event icon
+  const renderIcon = (event: TimelineEvent) => {
+    switch (event.type) {
+      case 'goal':
+        return (
+          <Icon
+            className={`${event.event === 'Own goal' ? 'text-red-500' : ''}`}
+            iconNode={soccerBall}
+          />
+        );
+      case 'yellow_card':
+        return (
+          <div className="bg-yellow-500 h-6 w-5 rounded-sm border border-black" />
+        );
+      case 'red_card':
+        return (
+          <div className="bg-red-500 h-6 w-5 rounded-sm border border-black" />
+        );
+
+      case 'substitution':
+        return <Repeat className="text-green-500 h-6 w-6" />;
+      default:
+        return null;
+    }
+  };
+
+  // Helper function to render event details
+  const renderEventDetails = (event: TimelineEvent) => (
+    <div
+      className={`flex items-center ${
+        event.team === 'home' ? 'flex-row-reverse text-right' : 'text-left'
+      }`}
+    >
+      <div className={`${event.team === 'home' ? 'ml-4' : 'mr-4'}`}>
+        {renderIcon(event)}
+      </div>
+      <div>
+        <div className="flex flex-col">
+          <span className="font-semibold">{event.player}</span>{' '}
+          {event.type === 'goal' && event.assist && (
+            <span className="text-sm">assist by {event.assist}</span>
+          )}
+        </div>
+        {event.type === 'goal' && event.event === 'Own goal' && (
+          <span className="text-sm text-red-500">(OG)</span>
+        )}
+        {event.type === 'substitution' && (
+          <div>
+            <div className="flex flex-col">
+              <span className="text-green-500">{event.player_in}</span>
+              <span className="text-red-500">{event.player_out}</span>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+
   return (
-    <div className="bg-card p-4 rounded-xl">
+    <Card className="mt-4">
       {events.map((event, index) => (
-        <div key={index} className="flex justify-center items-center mb-6">
+        <CardContent
+          key={index}
+          className="flex justify-center items-center p-4"
+        >
           {/* Home Team Events on the Left */}
           <div className="w-1/3 text-right">
             {event.team === 'home' && renderEventDetails(event)}
@@ -26,60 +90,10 @@ const Events: React.FC<EventsProps> = ({ events }) => {
           <div className="w-1/3 text-left">
             {event.team === 'away' && renderEventDetails(event)}
           </div>
-        </div>
+        </CardContent>
       ))}
-    </div>
+    </Card>
   );
-};
-
-// Helper function to render event details
-const renderEventDetails = (event: TimelineEvent) => (
-  <div
-    className={`flex items-center ${
-      event.team === 'home' ? 'flex-row-reverse text-right' : 'text-left'
-    }`}
-  >
-    <div className={`${event.team === 'home' ? 'ml-4' : 'mr-4'}`}>
-      {renderIcon(event.type)}
-    </div>
-    <div>
-      <div className="flex flex-col">
-        <span className="text-white font-semibold">{event.player}</span>{' '}
-        {event.type === 'goal' && event.assist && (
-          <span className="text-muted-foreground text-sm">
-            assist by {event.assist}
-          </span>
-        )}
-      </div>
-      {event.type === 'goal' && event.event === 'Own goal' && (
-        <span className="text-muted-foreground"> (OG)</span>
-      )}
-      {event.type === 'substitution' && (
-        <div>
-          <div className="flex flex-col">
-            <span className="text-green-500">{event.player_in}</span>
-            <span className="text-red-500">{event.player_out}</span>
-          </div>
-        </div>
-      )}
-    </div>
-  </div>
-);
-
-// Helper function to render event icon
-const renderIcon = (type: string) => {
-  switch (type) {
-    case 'goal':
-      return <span className="text-white text-2xl">⚽</span>;
-    case 'own_goal':
-      return <span className="text-red-500 text-2xl">⚽</span>;
-    case 'yellow_card':
-      return <span className="text-yellow-500 text-2xl">🟨</span>;
-    case 'substitution':
-      return <span className="text-green-500 text-2xl">🔄</span>;
-    default:
-      return null;
-  }
 };
 
 export default Events;

@@ -8,6 +8,7 @@ import ScoreCard from '@/app/components/match-details/ScoreCard';
 import TabSelector from '@/app/components/match-details/TabSelector';
 import TabContent from '@/app/components/match-details/TabContent';
 import { MatchDetails, MatchDetailsTab } from '@/types/matches';
+import { Card, CardContent } from '@/components/ui/card';
 
 export default function MatchDetailsPage() {
   const { id } = useParams();
@@ -46,30 +47,32 @@ export default function MatchDetailsPage() {
 
   return (
     <>
-      <div className="bg-card rounded-xl">
-        <MatchHeader leagueName={matchDetails.leagueName} />
-        <MatchMetadata
-          dateTime={matchDetails.dateTime}
-          stadium={matchDetails.stadium}
-          referee={matchDetails.referee}
-          attendance={matchDetails.attendance}
-        />
-        <ScoreCard
-          homeTeam={matchDetails.homeTeam}
-          awayTeam={matchDetails.awayTeam}
-          homeScore={matchDetails.homeScore}
-          awayScore={matchDetails.awayScore}
-          homeBadge={matchDetails.homeBadge}
-          awayBadge={matchDetails.awayBadge}
-          events={matchDetails.timelineEvents}
-        />
-        <TabSelector
-          selectedTab={selectedTab}
-          homeTeam={matchDetails.homeTeam}
-          awayTeam={matchDetails.awayTeam}
-          onSelectTab={setSelectedTab}
-        />
-      </div>
+      <Card>
+        <CardContent className="p-0">
+          <MatchHeader leagueName={matchDetails.leagueName} />
+          <MatchMetadata
+            dateTime={matchDetails.dateTime}
+            stadium={matchDetails.stadium}
+            referee={matchDetails.referee}
+            attendance={matchDetails.attendance}
+          />
+          <ScoreCard
+            homeTeam={matchDetails.homeTeam}
+            awayTeam={matchDetails.awayTeam}
+            homeScore={matchDetails.homeScore}
+            awayScore={matchDetails.awayScore}
+            homeBadge={matchDetails.homeBadge}
+            awayBadge={matchDetails.awayBadge}
+            events={matchDetails.timelineEvents}
+          />
+          <TabSelector
+            selectedTab={selectedTab}
+            homeTeam={matchDetails.homeTeam}
+            awayTeam={matchDetails.awayTeam}
+            onSelectTab={setSelectedTab}
+          />
+        </CardContent>
+      </Card>
       <TabContent
         selectedTab={selectedTab}
         events={matchDetails.timelineEvents}

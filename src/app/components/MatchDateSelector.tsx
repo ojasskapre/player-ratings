@@ -1,12 +1,21 @@
 import { useState } from 'react';
 import { format, addDays } from 'date-fns';
+import { Button } from '@/components/ui/button';
+import { Calendar } from '@/components/ui/calendar';
+import { ChevronLeft, ChevronRight, CalendarIcon } from 'lucide-react';
+
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover';
 
 const MatchDateSelector = ({
   onDateChange,
 }: {
   onDateChange: (date: Date) => void;
 }) => {
-  const [currentDate, setCurrentDate] = useState(new Date());
+  const [currentDate, setCurrentDate] = useState<Date>(new Date());
 
   const changeDate = (days: number) => {
     const newDate = addDays(currentDate, days);
@@ -25,24 +34,30 @@ const MatchDateSelector = ({
   };
 
   return (
-    <div className="flex items-center justify-center my-4 bg-primary text-foreground rounded-lg px-4 py-2">
-      <button
-        onClick={() => changeDate(-1)}
-        className="text-foreground bg-secondary hover:bg-muted rounded-full p-2"
-      >
-        &lt;
-      </button>
-      {/* TODO: make this an actual date picker */}
-      <div className="flex-grow text-center">
-        <span className="text-lg font-medium">{formatDate(currentDate)}</span>
-        <span className="ml-2">&#9662;</span>
-      </div>
-      <button
-        onClick={() => changeDate(1)}
-        className="text-foreground bg-secondary hover:bg-muted rounded-full p-2"
-      >
-        &gt;
-      </button>
+    <div className="flex items-center justify-center my-4">
+      <Button variant="outline" size="icon" onClick={() => changeDate(-1)}>
+        <ChevronLeft className="h-4 w-4" />
+      </Button>
+
+      <Popover>
+        <PopoverTrigger asChild>
+          <Button variant="outline" className="mx-2">
+            <CalendarIcon className="mr-2 h-4 w-4" />
+            {currentDate ? formatDate(currentDate) : <span>Pick a date</span>}
+          </Button>
+        </PopoverTrigger>
+        <PopoverContent>
+          <Calendar
+            mode="single"
+            selected={currentDate}
+            onSelect={(date) => setCurrentDate(date as Date)}
+          />
+        </PopoverContent>
+      </Popover>
+
+      <Button variant="outline" size="icon" onClick={() => changeDate(1)}>
+        <ChevronRight className="h-4 w-4" />
+      </Button>
     </div>
   );
 };

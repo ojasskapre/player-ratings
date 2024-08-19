@@ -1,35 +1,4 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-:root {
-  --foreground: #E4E4E7; /* Light gray for text */
-  --background: #121212; /* Dark background */
-  --primary: #1F1F1F; /* Slightly lighter dark for primary elements */
-  --secondary: #2C2C2C; /* Dark gray for secondary elements */
-  --card: #1F1F1F; /* Same as primary for card backgrounds */
-  --card-foreground: #E4E4E7; /* Light gray for card text */
-  --card-hover: #2C2C2C; /* Slight light gray color on card hover */
-  --popover: #2C2C2C; /* Dark gray for popovers */
-  --popover-foreground: #E4E4E7; /* Light gray for popover text */
-  --muted: #3F3F3F; /* Muted dark gray */
-  --muted-foreground: #A1A1AA; /* Muted light gray */
-  --accent: #3B82F6; /* Blue for accents */
-  --accent-foreground: #FFFFFF; /* White for accent text */
-  --destructive: #EF4444; /* Red for destructive actions */
-  --destructive-foreground: #FFFFFF; /* White for destructive text */
-  --border: #3F3F3F; /* Dark gray for borders */
-  --input: #2C2C2C; /* Dark gray for inputs */
-  --ring: #3B82F6; /* Blue for focus rings */
-}
-
-body {
-  color: var(--foreground);
-  background: var(--background);
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-}
+  
